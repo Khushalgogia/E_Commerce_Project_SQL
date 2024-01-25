@@ -46,8 +46,8 @@ SELECT 'sales_target' AS sales_target, COUNT(*) AS RowCount FROM sales_target;
 Select distinct count(customername) as Total_no_of_customers from list_of_orders
 ```
 ![Alt text](image-4.png)
+
 •	Identify the top 5 states with the highest number of customers.
-```
 select state, count(customername) as no_of_customers from list_of_orders
 group by state
 order by no_of_customers desc
