@@ -58,6 +58,39 @@ limit 5
 
 •	Calculate the average order value for each customer.
 
+```
+Select customername, round(avg(amount),0) as Avg_Order_Value from
+(select l.order_id, l.customername, o.amount from list_of_orders l
+join order_details o on l.order_id = o.order_id) f
+group by customername
+```
+![Alt text](image-6.png)
+
+
+#### Product Analysis:
+•	Determine the total number of unique products.
+
+```
+Select count(distinct subcategory) as Count_of_Unique_products  from order_details
+
+```
+![Alt text](image-7.png)
+
+•	Find the top 10 best-selling products.
+```
+Select subcategory, sum(quantity) as Sales_Quantity from order_details
+group by subcategory
+order by sum(quantity) desc
+limit 10
+```
+![Alt text](image-8.png)
+
+#### Order Analysis:
+•	Find the total number of orders.
+
+•	Calculate the average order value.
+•	Identify the month with the highest number of orders.
+
 
 
 
