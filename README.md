@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # E-Commerce Project
 
 ### Objective:
@@ -143,7 +142,6 @@ limit 5;
 
 
 
-=======
 # E-Commerce Project
 
 ### Objective:
@@ -249,4 +247,3 @@ limit 10
 
 
 
->>>>>>> 8eaafcaced069f2fa227bf8f231560931c961723
