@@ -87,9 +87,48 @@ limit 10
 
 #### Order Analysis:
 •	Find the total number of orders.
+```
+select count(order_id) as Total_No_of_orders from list_of_orders;
 
-•	Calculate the average order value.
+```
+![Alt text](image-9.png)
+
+
 •	Identify the month with the highest number of orders.
+```
+select monthname(order_date) as Month, sum(quantity) as No_of_Order from (select l.order_id, l.order_date, o.amount, o.quantity from list_of_orders l left join order_details o on l.order_id = o.order_id) j
+group by monthname(order_date)
+order by sum(quantity) desc
+```
+![Alt text](image-10.png)
+
+#### Practice Questions: E-commerce Dataset
+1.	Rank the products based on their total sales revenue. Include the product name, total sales revenue, and the rank.
+```
+select subcategory as Products, sum(amount) as Sales_Revenue, rank() over (order by sum(amount) desc) as revenue_rank from order_details
+group by Products
+```
+![Alt text](image-11.png)
+2.	Find the top 5 customers with the highest cumulative purchase amount. Show customer ID, name, and the cumulative purchase amount.
+```
+select l.customername , sum(o.amount) as purchase_amount from list_of_orders l
+join order_details o
+on l.order_id =  o.order_id
+group by l.customername, l.order_id
+order by sum(o.amount) desc
+limit 5;
+```
+![Alt text](image-12.png)
+3.	Calculate the running total of sales revenue for each product. Display the product name, date, and the running total of sales revenue.
+
+4.	Identify customers who have placed orders with a total value greater than the average order value. Show customer ID, name, and total order value.
+5.	Determine the difference in sales revenue from the previous day for each product. Show the product name, date, sales revenue, and the daily difference.
+6.	List the customers who have made at least two purchases in the same day. Show customer ID, name, and the number of purchases.
+7.	Calculate the total sales revenue for each month. Display the month name, year, and total sales revenue.
+8.	Find products that have sales revenue higher than the average sales revenue. Display the product name, sales revenue, and the average sales revenue.
+9.	Identify the average order value for each quarter. Display the quarter, year, and average order value.
+
+
 
 
 
