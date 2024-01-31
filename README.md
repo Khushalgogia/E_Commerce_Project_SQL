@@ -119,10 +119,29 @@ order by sum(o.amount) desc
 limit 5;
 ```
 ![Alt text](image-12.png)
+
 3.	Calculate the running total of sales revenue for each product. Display the product name, date, and the running total of sales revenue.
+```
+Select f.*, sum(f.amount) over (PARTITION BY f.productname order by f.order_date) as running_total from (
+Select l.Order_date, o.subcategory as productname, o.Amount from list_of_orders l
+join order_details o
+on l.order_id = o.order_id) f;
+```
+![Alt text](image-13.png)
 
 4.	Identify customers who have placed orders with a total value greater than the average order value. Show customer ID, name, and total order value.
+```
+Select l.customername, o.amount from list_of_orders l
+Join order_details o
+on l.order_id = o.order_id
+where o.amount > (select avg(amount) as Avg_order_value from order_details)
+```
+
+![Alt text](image-14.png)
+
 5.	Determine the difference in sales revenue from the previous day for each product. Show the product name, date, sales revenue, and the daily difference.
+
+
 6.	List the customers who have made at least two purchases in the same day. Show customer ID, name, and the number of purchases.
 7.	Calculate the total sales revenue for each month. Display the month name, year, and total sales revenue.
 8.	Find products that have sales revenue higher than the average sales revenue. Display the product name, sales revenue, and the average sales revenue.
