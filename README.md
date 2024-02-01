@@ -140,7 +140,7 @@ where o.amount > (select avg(amount) as Avg_order_value from order_details)
 ![Alt text](image-14.png)
 
 5.	Determine the difference in sales revenue from the previous day for each product. Show the product name, date, sales revenue, and the daily difference.
-
+to check the 
 
 6.	List the customers who have made at least two purchases in the same day. Show customer ID, name, and the number of purchases.
 7.	Calculate the total sales revenue for each month. Display the month name, year, and total sales revenue.
