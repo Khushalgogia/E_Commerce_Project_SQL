@@ -140,9 +140,21 @@ where o.amount > (select avg(amount) as Avg_order_value from order_details)
 ![Alt text](image-14.png)
 
 5.	Determine the difference in sales revenue from the previous day for each product. Show the product name, date, sales revenue, and the daily difference.
-to check the 
-
+```
+Select l.Order_Date, o.Amount as sales_revenue,(o.Amount - lag(o.Amount) over (order by l.Order_Date)) as Daily_Differnce from List_of_Orders l
+Join Order_Details o
+on l.Order_ID = o.Order_ID;
+```
+![alt text](image-15.png)
 6.	List the customers who have made at least two purchases in the same day. Show customer ID, name, and the number of purchases.
+```
+Select l.Order_Date,l.CustomerName,COUNT(l.CustomerName) as Purchases from List_of_Orders l
+Join Order_Details o
+on l.Order_ID = o.Order_ID
+Group By l.Order_Date,l.CustomerName
+Having Purchases > 2
+```
+![alt text](image-16.png)
 7.	Calculate the total sales revenue for each month. Display the month name, year, and total sales revenue.
 8.	Find products that have sales revenue higher than the average sales revenue. Display the product name, sales revenue, and the average sales revenue.
 9.	Identify the average order value for each quarter. Display the quarter, year, and average order value.
