@@ -156,10 +156,29 @@ Having Purchases > 2
 ```
 ![alt text](image-16.png)
 7.	Calculate the total sales revenue for each month. Display the month name, year, and total sales revenue.
-8.	Find products that have sales revenue higher than the average sales revenue. Display the product name, sales revenue, and the average sales revenue.
-9.	Identify the average order value for each quarter. Display the quarter, year, and average order value.
+
+```
+Select year(orderdate) as year,MonthName(orderdate) as month, SUM(Amount) as Sales from (Select * from List_of_Orders l  
+																	join Order_Details o
+                                                                    on l.order_id = o.orderid) temp
+
+group by year, month
+```
+![alt text](image-17.png)
 
 
+
+
+8.	Identify the average order value for each quarter. Display the quarter, year, and average order value.
+
+```
+select year(orderdate) as year,quarter(orderdate) as quarter,avg(Amount) from 
+											(select * from List_of_Orders l
+											join Order_Details o
+											on l.order_id = o.orderid) temp
+group by year,quarter
+```
+![alt text](image-18.png)
 
 
 
