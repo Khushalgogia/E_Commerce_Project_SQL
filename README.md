@@ -8,7 +8,7 @@
 select * from list_of_orders
 ```
 
-![Alt text](image.png)
+![Alt text](images/image.png)
 
 ```
 select * from order_details
