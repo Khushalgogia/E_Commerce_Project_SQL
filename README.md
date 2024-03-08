@@ -14,13 +14,13 @@ select * from list_of_orders
 select * from order_details
 ```
 
-![Alt text](image-1.png)
+![Alt text](images/image-1.png)
 
 ```
 select * from sales_target
 ```
 
-![Alt text](image-2.png)
+![Alt text](images/image-2.png)
 
 
 #### Analysis
@@ -38,14 +38,14 @@ SELECT 'order_details' AS order_details, COUNT(*) AS RowCount FROM order_details
 UNION
 SELECT 'sales_target' AS sales_target, COUNT(*) AS RowCount FROM sales_target;
 ```
-![Alt text](image-3.png)
+![Alt text](images/image-3.png)
 
 #### Customer Analysis:
 •	Find the total number of customers.
 ```
 Select distinct count(customername) as Total_no_of_customers from list_of_orders
 ```
-![Alt text](image-4.png)
+![Alt text](images/image-4.png)
 
 •	Identify the top 5 states with the highest number of customers.
 ```
@@ -54,7 +54,7 @@ group by state
 order by no_of_customers desc
 limit 5
 ```
-![Alt text](image-5.png)
+![Alt text](images/image-5.png)
 
 •	Calculate the average order value for each customer.
 
@@ -64,7 +64,7 @@ Select customername, round(avg(amount),0) as Avg_Order_Value from
 join order_details o on l.order_id = o.order_id) f
 group by customername
 ```
-![Alt text](image-6.png)
+![Alt text](images/image-6.png)
 
 
 #### Product Analysis:
@@ -74,7 +74,7 @@ group by customername
 Select count(distinct subcategory) as Count_of_Unique_products  from order_details
 
 ```
-![Alt text](image-7.png)
+![Alt text](images/image-7.png)
 
 •	Find the top 10 best-selling products.
 ```
@@ -83,7 +83,7 @@ group by subcategory
 order by sum(quantity) desc
 limit 10
 ```
-![Alt text](image-8.png)
+![Alt text](images/image-8.png)
 
 #### Order Analysis:
 •	Find the total number of orders.
@@ -91,7 +91,7 @@ limit 10
 select count(order_id) as Total_No_of_orders from list_of_orders;
 
 ```
-![Alt text](image-9.png)
+![Alt text](images/image-9.png)
 
 
 •	Identify the month with the highest number of orders.
@@ -100,7 +100,7 @@ select monthname(order_date) as Month, sum(quantity) as No_of_Order from (select
 group by monthname(order_date)
 order by sum(quantity) desc
 ```
-![Alt text](image-10.png)
+![Alt text](images/image-10.png)
 
 #### Practice Questions: E-commerce Dataset
 1.	Rank the products based on their total sales revenue. Include the product name, total sales revenue, and the rank.
@@ -108,7 +108,7 @@ order by sum(quantity) desc
 select subcategory as Products, sum(amount) as Sales_Revenue, rank() over (order by sum(amount) desc) as revenue_rank from order_details
 group by Products
 ```
-![Alt text](image-11.png)
+![Alt text](images/image-11.png)
 2.	Find the top 5 customers with the highest cumulative purchase amount. Show customer ID, name, and the cumulative purchase amount.
 ```
 select l.customername , sum(o.amount) as purchase_amount from list_of_orders l
@@ -118,7 +118,7 @@ group by l.customername, l.order_id
 order by sum(o.amount) desc
 limit 5;
 ```
-![Alt text](image-12.png)
+![Alt text](images/image-12.png)
 
 3.	Calculate the running total of sales revenue for each product. Display the product name, date, and the running total of sales revenue.
 ```
@@ -127,7 +127,7 @@ Select l.Order_date, o.subcategory as productname, o.Amount from list_of_orders 
 join order_details o
 on l.order_id = o.order_id) f;
 ```
-![Alt text](image-13.png)
+![Alt text](images/image-13.png)
 
 4.	Identify customers who have placed orders with a total value greater than the average order value. Show customer ID, name, and total order value.
 ```
@@ -137,7 +137,7 @@ on l.order_id = o.order_id
 where o.amount > (select avg(amount) as Avg_order_value from order_details)
 ```
 
-![Alt text](image-14.png)
+![Alt text](images/image-14.png)
 
 5.	Determine the difference in sales revenue from the previous day for each product. Show the product name, date, sales revenue, and the daily difference.
 ```
@@ -145,7 +145,7 @@ Select l.Order_Date, o.Amount as sales_revenue,(o.Amount - lag(o.Amount) over (o
 Join Order_Details o
 on l.Order_ID = o.Order_ID;
 ```
-![alt text](image-15.png)
+![alt text](images/image-15.png)
 6.	List the customers who have made at least two purchases in the same day. Show customer ID, name, and the number of purchases.
 ```
 Select l.Order_Date,l.CustomerName,COUNT(l.CustomerName) as Purchases from List_of_Orders l
@@ -154,7 +154,7 @@ on l.Order_ID = o.Order_ID
 Group By l.Order_Date,l.CustomerName
 Having Purchases > 2
 ```
-![alt text](image-16.png)
+![alt text](images/image-16.png)
 7.	Calculate the total sales revenue for each month. Display the month name, year, and total sales revenue.
 
 ```
@@ -164,7 +164,7 @@ Select year(orderdate) as year,MonthName(orderdate) as month, SUM(Amount) as Sal
 
 group by year, month
 ```
-![alt text](image-17.png)
+![alt text](images/image-17.png)
 
 
 
@@ -178,7 +178,7 @@ select year(orderdate) as year,quarter(orderdate) as quarter,avg(Amount) from
 											on l.order_id = o.orderid) temp
 group by year,quarter
 ```
-![alt text](image-18.png)
+![alt text](images/image-18.png)
 
 
 
